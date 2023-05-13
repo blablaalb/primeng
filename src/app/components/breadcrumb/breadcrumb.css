@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .p-breadcrumb .p-menuitem-text {
@@ -21,5 +22,29 @@
 }
 
 .p-breadcrumb::-webkit-scrollbar {
-    display: none;
+    display: inline-block;
+    height: 3px;
+}
+
+/* Track | Background */
+.p-breadcrumb::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.p-breadcrumb::-webkit-scrollbar-thumb {
+    background: #ffffff00;
+}
+
+.p-breadcrumb:hover::-webkit-scrollbar-thumb {
+    background: #C1C1C1;
+}
+
+.p-breadcrumb.show-scrollbar::-webkit-scrollbar-thumb {
+    background: #C1C1C1;
+}
+
+/* Handle on hover */
+.p-breadcrumb::-webkit-scrollbar-thumb:hover {
+    background: #515151;
 }

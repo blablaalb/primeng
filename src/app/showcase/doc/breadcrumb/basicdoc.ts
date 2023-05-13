@@ -24,7 +24,19 @@ export class BasicDoc implements OnInit {
     home: MenuItem;
 
     ngOnInit() {
-        this.items = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+        this.items = [
+            { label: 'Computer' },
+            { label: 'Notebook' },
+            { label: 'Accessories' },
+            { label: 'Backpacks' },
+            { label: 'Item 1' },
+            { label: 'Item 2' },
+            { label: 'Item 3' },
+            { label: 'Item 4' },
+            { label: 'Item 5' },
+            { label: 'Item 6' },
+            { label: 'Item 7' }
+        ];
 
         this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
