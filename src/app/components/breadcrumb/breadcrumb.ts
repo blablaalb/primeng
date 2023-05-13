@@ -1,4 +1,4 @@
-import { NgModule, Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, QueryList, TemplateRef, AfterContentInit } from '@angular/core';
+import { NgModule, Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, QueryList, TemplateRef, AfterContentInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuItem, PrimeTemplate, SharedModule } from 'primeng/api';
 import { RouterModule } from '@angular/router';
@@ -6,10 +6,13 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ChevronRightIcon } from 'primeng/icons/chevronright';
 import { HomeIcon } from 'primeng/icons/home';
 
+import { fromEvent, asyncScheduler, Subject } from 'rxjs';
+import { debounceTime, map, throttleTime } from 'rxjs/operators';
+
 @Component({
     selector: 'p-breadcrumb',
     template: `
-        <div [class]="styleClass" [ngStyle]="style" [ngClass]="'p-breadcrumb p-component'">
+        <div #breadcrumb [ngStyle]="style" [class]="styleClass" [ngClass]="{ 'p-breadcrumb': true, 'p-component': true, 'show-scrollbar': (showScrollbar$ | async) }">
             <ul>
                 <li [class]="home.styleClass" [ngClass]="{ 'p-breadcrumb-home': true, 'p-disabled': home.disabled }" [ngStyle]="home.style" *ngIf="home" pTooltip [tooltipOptions]="home.tooltipOptions">
                     <a
@@ -121,7 +124,7 @@ import { HomeIcon } from 'primeng/icons/home';
         class: 'p-element'
     }
 })
-export class Breadcrumb implements AfterContentInit {
+export class Breadcrumb implements AfterContentInit, AfterViewInit {
     @Input() model: MenuItem[];
 
     @Input() style: any;
@@ -137,6 +140,30 @@ export class Breadcrumb implements AfterContentInit {
     @ContentChildren(PrimeTemplate) templates: QueryList<any>;
 
     separatorTemplate: TemplateRef<any>;
+
+    showScrollbar$ = new Subject<boolean>();
+
+    @ViewChild('breadcrumb', { read: ElementRef })
+    breadcrumb!: ElementRef;
+
+    ngAfterViewInit() {
+        var scroll$ = fromEvent(this.breadcrumb.nativeElement, 'scroll');
+        scroll$
+            .pipe(
+                throttleTime(100, asyncScheduler, {
+                    leading: false,
+                    trailing: true
+                }),
+                map((x) => {
+                    this.showScrollbar$.next(true);
+                }),
+                debounceTime(800),
+                map((x) => {
+                    this.showScrollbar$.next(false);
+                })
+            )
+            .subscribe();
+    }
 
     itemClick(event, item: MenuItem) {
         if (item.disabled) {
