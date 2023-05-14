@@ -12,7 +12,7 @@ import { debounceTime, map, throttleTime } from 'rxjs/operators';
 @Component({
     selector: 'p-breadcrumb',
     template: `
-        <div #breadcrumb  [class]="styleClass" [ngClass]="{ 'p-breadcrumb': true, 'p-component': true, 'show-scrollbar': (showScrollbar$ | async) }">
+        <div #breadcrumb [ngStyle]="style" [class]="styleClass" [ngClass]="{ 'p-breadcrumb': true, 'p-component': true, 'show-scrollbar': (showScrollbar$ | async) }">
             <ul>
                 <li [class]="home.styleClass" [ngClass]="{ 'p-breadcrumb-home': true, 'p-disabled': home.disabled }" [ngStyle]="home.style" *ngIf="home" pTooltip [tooltipOptions]="home.tooltipOptions">
                     <a
@@ -210,4 +210,4 @@ export class Breadcrumb implements AfterContentInit, AfterViewInit {
     exports: [Breadcrumb, RouterModule, TooltipModule, SharedModule],
     declarations: [Breadcrumb]
 })
-export class BreadcrumbModule { }
+export class BreadcrumbModule {}
