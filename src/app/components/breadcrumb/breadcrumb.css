@@ -1,5 +1,6 @@
 .p-breadcrumb {
-    overflow-x: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .p-breadcrumb ul {
@@ -24,27 +25,4 @@
 .p-breadcrumb::-webkit-scrollbar {
     display: inline-block;
     height: 3px;
-}
-
-/* Track | Background */
-.p-breadcrumb::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-.p-breadcrumb::-webkit-scrollbar-thumb {
-    background: #ffffff00;
-}
-
-.p-breadcrumb:hover::-webkit-scrollbar-thumb {
-    background: #C1C1C1;
-}
-
-.p-breadcrumb.show-scrollbar::-webkit-scrollbar-thumb {
-    background: #C1C1C1;
-}
-
-/* Handle on hover */
-.p-breadcrumb::-webkit-scrollbar-thumb:hover {
-    background: #515151;
 }
