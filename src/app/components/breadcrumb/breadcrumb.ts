@@ -150,14 +150,14 @@ export class Breadcrumb implements AfterContentInit, AfterViewInit {
         var scroll$ = fromEvent(this.breadcrumb.nativeElement, 'scroll');
         scroll$
             .pipe(
-                throttleTime(100, asyncScheduler, {
+                throttleTime(90, asyncScheduler, {
                     leading: false,
                     trailing: true
                 }),
                 map((x) => {
                     this.beingScrolled$.next(true);
                 }),
-                debounceTime(800),
+                debounceTime(100),
                 map((x) => {
                     this.beingScrolled$.next(false);
                 })
