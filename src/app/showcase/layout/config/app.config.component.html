@@ -32,6 +32,16 @@
 
         <section>
             <h3>Themes</h3>
+            <h4>My Themes</h4>
+            <div class="grid">
+                <div class="col-3 flex flex-column align-items-center gap-2">
+                    <button class="p-link h-3rem" (click)="changeTheme($event, 'mytheme', true)">
+                        <img src="https://www.svgrepo.com/show/6974/one.svg"  alt="My Theme" class="w-3rem border-round" />
+                    </button>
+                    <span class="white-space-nowrap">My Theme</span>
+                </div>
+            </div>
+
             <h4>Bootstrap</h4>
             <div class="grid">
                 <div class="col-3 flex flex-column align-items-center gap-2">
